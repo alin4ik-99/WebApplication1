@@ -16,33 +16,16 @@ namespace WebApplication1.Controllers
         [HttpGet(template: "/depozit")]
 
         public string[] Depozit(double StartDepozit, double MounthPlus, double YearProcent, int TerminInMounth)
-        {  
-           
-           double MounthProcent(double yearprocent)
-           {
-                   return (double)(Math.Pow((1.0 + (double)yearprocent / 100.0), 1 / 12D) - 1) * 100;
-           }
- 
-       
-            string[] depozit = new string[TerminInMounth];
+        {
 
-            for (int i = 0; i < TerminInMounth; i++)
-            {
-                double MounthlyIncm = StartDepozit * (MounthProcent(YearProcent) / 100);
-                StartDepozit = StartDepozit + MounthlyIncm;
-                StartDepozit += MounthPlus;
-            
+            Depozit1 Dep = new Depozit1(new MounthlyDepozitReport());
+            Dep.StartDepozit = StartDepozit;
+            Dep.MounthPlus = MounthPlus;
+            Dep.YearProcent = YearProcent;
+            Dep.TerminInMounth = TerminInMounth;
 
-                MounthlyDepozitReport MounthlyReport = new MounthlyDepozitReport(i+1, StartDepozit, MounthlyIncm, MounthPlus);
+            return Dep.DifficultProcent();
 
-                string json = System.Text.Json.JsonSerializer.Serialize(MounthlyReport);
-
-                depozit[i] = json;
-
-            }
-
-            return depozit;
-            
         }
     }
 }
