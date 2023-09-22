@@ -5,7 +5,7 @@ namespace WebApplication1.Models
 
     public class Depozit1
     {
-
+        gbtrbtbtbbtbttttt;
         public IMounthlyDepozitReport mounthlyDepozitReport;
         public Depozit1(IMounthlyDepozitReport mounthlyDepozitReport)
         { 
